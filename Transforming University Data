@@ -1,0 +1,26 @@
+import pandas as pd
+import csv
+import os
+# Reading csv file using pandas
+df_uniplaces=pd.read_table("uniplaces.txt", delimiter="\t", names = ['Data'])
+
+
+
+# Splitting data into State/city and university
+df_uniplaces[['State/City','University']]=df_uniplaces['Data'].str.split('(', n=1, expand=True)
+
+# removing unususal entry like([edit])
+df_uniplaces = df_uniplaces.replace(to_replace ='edit', value = '', regex = True)
+
+# removing unususal entry like([1])
+df_uniplaces = df_uniplaces.replace(to_replace ='[1]', value = '', regex = True)
+
+# removing unususal entry like([edit])
+df_uniplaces = df_uniplaces.replace(to_replace ='[2]', value = '', regex = True)
+
+# removing unususal entry like([edit])
+df_uniplaces = df_uniplaces.replace(to_replace ='[ ]', value = '', regex = True)
+
+# Selecting State/City and University column
+df_uniplaces=df_uniplaces[["State/City","University"]]                 
+df_uniplaces
