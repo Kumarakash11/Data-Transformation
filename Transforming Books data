@@ -1,0 +1,32 @@
+import pandas as pd
+import csv
+import os
+# Reading csv file using pandas
+df_books=pd.read_csv('books.csv',header=0)
+
+#Dropping columns that we dont need
+
+df_books=df_books.drop('Edition Statement',1)
+df_books=df_books.drop('Corporate Author',1)
+df_books=df_books.drop('Corporate Contributors',1)
+df_books=df_books.drop('Former owner',1)
+df_books=df_books.drop('Engraver',1)
+df_books=df_books.drop('Issuance type',1)
+df_books=df_books.drop('Shelfmarks',1)
+
+#Selecting columns
+
+df_books2= pd.read_csv("books.csv", skipinitialspace=True, usecols=["Identifier","Place of Publication","Date of Publication",
+                                                                    "Publisher","Title","Author","Contributors","Flickr URL"]
+                                                                    
+# removing sq brackets date
+df_books3 = df_books.replace(to_replace ='\[[^\]]*\]', value = '', regex = True)
+
+# removing unususal date(example-22)
+df_books4 = df_books3.replace(to_replace ='[-]+[0-9]{2}', value = '', regex = True)
+
+# removing unususal date(example ,32)
+df_books5 = df_books4.replace(to_replace ='[0-9]{4}, \d\d', value = '', regex = True)
+
+#Converting Date of Publicaton column to numeric
+df_books5["Date of Publication"] = pd.to_numeric(df_books5["Date of Publication"])
