@@ -1,0 +1,11 @@
+import pandas as pd
+import csv
+import os
+# Reading csv file using pandas
+df_trimet=pd.read_csv('trimet.csv',header=0)
+
+#Countig the rows that have OCCURRENCES >=2 
+for OCCURRENCES in df_trimet[['OCCURRENCES']].iteritems():
+   df_trimet= df_trimet['OCCURRENCES'].apply(lambda x: 'True' if x >= 2 else 'False')
+
+print(df_trimet)
