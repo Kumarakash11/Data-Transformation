@@ -1,7 +1,7 @@
 import pandas as pd
 import csv
 import os
-# Reading csv file using pandas
+
 df_uniplaces=pd.read_table("uniplaces.txt", delimiter="\t", names = ['Data'])
 
 
